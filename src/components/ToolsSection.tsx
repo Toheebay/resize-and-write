@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 import { 
   FileText, 
   Minimize2, 
@@ -82,12 +83,21 @@ const ToolsSection = () => {
                     </li>
                   ))}
                 </ul>
-                <Button 
-                  variant="gradient" 
-                  className="w-full group-hover:shadow-glow"
+                <Link 
+                  to={
+                    tool.title === "PDF to Word" ? "/convert" :
+                    tool.title === "Compress PDF" ? "/compress" :
+                    tool.title === "Enlarge PDF" ? "/enlarge" :
+                    "/auth"
+                  }
                 >
-                  Try Now
-                </Button>
+                  <Button 
+                    variant="gradient" 
+                    className="w-full group-hover:shadow-glow"
+                  >
+                    Try Now
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           ))}

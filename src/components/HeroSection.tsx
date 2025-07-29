@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { FileText, Zap, Shield, Download } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
 
 const HeroSection = () => {
@@ -66,13 +67,15 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              variant="hero" 
-              size="xl"
-              className="bg-white text-primary hover:bg-white/90 shadow-glow"
-            >
-              Start Processing PDFs
-            </Button>
+            <Link to="/auth">
+              <Button 
+                variant="hero" 
+                size="xl"
+                className="bg-white text-primary hover:bg-white/90 shadow-glow"
+              >
+                Start Processing PDFs
+              </Button>
+            </Link>
             <Button 
               variant="outline" 
               size="xl"
