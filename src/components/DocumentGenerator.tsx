@@ -15,7 +15,8 @@ const DocumentGenerator = () => {
     content: "",
     companyName: "",
     contactInfo: "",
-    date: new Date().toISOString().split('T')[0]
+    date: new Date().toISOString().split('T')[0],
+    generatedContent: ""
   });
   const [logo, setLogo] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
@@ -57,18 +58,86 @@ const DocumentGenerator = () => {
       return;
     }
 
-    // In a real app, this would generate the actual document
+    // Generate actual document content
+    const documentContent = `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>${formData.title}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo { max-height: 80px; margin-bottom: 20px; }
+        .company-info { margin-bottom: 20px; }
+        .content { margin-top: 30px; }
+        .footer { margin-top: 40px; font-size: 12px; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        ${logoPreview ? `<img src="${logoPreview}" alt="Logo" class="logo">` : ''}
+        <h1>${formData.title}</h1>
+    </div>
+    
+    <div class="company-info">
+        ${formData.companyName ? `<h2>${formData.companyName}</h2>` : ''}
+        ${formData.contactInfo ? `<p>${formData.contactInfo.replace(/\n/g, '<br>')}</p>` : ''}
+        <p><strong>Date:</strong> ${new Date(formData.date).toLocaleDateString()}</p>
+    </div>
+    
+    <div class="content">
+        <p>${formData.content.replace(/\n/g, '</p><p>')}</p>
+    </div>
+    
+    <div class="footer">
+        <p>Generated on ${new Date().toLocaleDateString()} - Document Type: ${formData.documentType}</p>
+    </div>
+</body>
+</html>
+    `;
+
+    // Store generated content for download
+    setFormData(prev => ({ ...prev, generatedContent: documentContent }));
     toast.success("Document generated successfully! Ready for download.");
   };
 
   const downloadDocument = () => {
-    // In a real app, this would trigger the download
-    toast.success("Document downloaded!");
+    if (!formData.generatedContent) {
+      toast.error("Please generate document first");
+      return;
+    }
+
+    const blob = new Blob([formData.generatedContent], { type: 'text/html' });
+    const fileName = `${formData.title.replace(/\s+/g, '_')}_${formData.documentType}.html`;
+    
+    // Using file-saver to trigger download
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    
+    toast.success("Document downloaded successfully!");
   };
 
   const printDocument = () => {
-    // In a real app, this would open print dialog
-    toast.success("Opening print dialog...");
+    if (!formData.generatedContent) {
+      toast.error("Please generate document first");
+      return;
+    }
+
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(formData.generatedContent);
+      printWindow.document.close();
+      printWindow.print();
+      toast.success("Opening print dialog...");
+    } else {
+      toast.error("Please allow popups to print document");
+    }
   };
 
   return (
