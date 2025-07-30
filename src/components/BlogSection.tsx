@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, User, ArrowRight, BookOpen } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Calendar, User, ArrowRight, BookOpen, Plus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useAuth } from "@/contexts/AuthContext";
 
 interface BlogPost {
   id: string;
@@ -20,7 +22,8 @@ interface BlogPost {
 const BlogSection = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
+  const [username, setUsername] = useState("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     fetchPosts();
@@ -45,8 +48,8 @@ const BlogSection = () => {
   };
 
   const createSamplePosts = async () => {
-    if (!user) {
-      toast.error("Please sign in to create posts");
+    if (!username.trim()) {
+      toast.error("Please enter your name to create posts");
       return;
     }
 
@@ -83,8 +86,8 @@ const BlogSection = () => {
 5. Deploy and share your new website
 
 This approach gives you a professional web presence without any upfront costs, perfect for students and new professionals building their online portfolio.`,
-        author: user.id,
-        author_name: "PDF Tools Team",
+        author: "anonymous",
+        author_name: username,
         tags: ["website", "free", "portfolio", "students"]
       },
       {
@@ -129,8 +132,8 @@ This approach gives you a professional web presence without any upfront costs, p
 
 **How to generate documents using our free tool:**
 Use our Professional Document Generator to create polished motivation letters, CVs, and statements of purpose. Our templates are specifically designed for scholarship applications and include all necessary sections and formatting.`,
-        author: user.id,
-        author_name: "PDF Tools Team",
+        author: "anonymous",
+        author_name: username,
         tags: ["scholarships", "education", "applications", "funding"]
       },
       {
@@ -185,8 +188,8 @@ Use our Professional Document Generator to create polished motivation letters, C
 - Add co-authors when possible
 
 Having a strong Google Scholar presence can significantly boost your academic profile and make you stand out in competitive application processes.`,
-        author: user.id,
-        author_name: "PDF Tools Team",
+        author: "anonymous",
+        author_name: username,
         tags: ["google scholar", "research", "academic", "profile"]
       },
       {
@@ -257,8 +260,8 @@ We believe that everyone deserves access to professional web design, regardless 
    - Revisions and launch: 1 week
 
 **Contact us today** to see if you qualify for our free website design program. Together, we can build something amazing that helps you achieve your goals online.`,
-        author: user.id,
-        author_name: "PDF Tools Team",
+        author: "anonymous",
+        author_name: username,
         tags: ["free design", "students", "non-profit", "community"]
       }
     ];
@@ -271,6 +274,8 @@ We believe that everyone deserves access to professional web design, regardless 
       if (error) throw error;
       
       toast.success("Sample blog posts created successfully!");
+      setIsDialogOpen(false);
+      setUsername("");
       fetchPosts();
     } catch (error: any) {
       console.error('Error creating posts:', error);
@@ -309,11 +314,33 @@ We believe that everyone deserves access to professional web design, regardless 
             <p className="text-muted-foreground mb-6">
               Be the first to read our amazing content!
             </p>
-            {user && (
-              <Button onClick={createSamplePosts} variant="gradient">
-                Create Sample Posts
-              </Button>
-            )}
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button variant="gradient">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Create Sample Posts
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Create Blog Posts</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="username">Your Name</Label>
+                    <Input
+                      id="username"
+                      placeholder="Enter your name"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </div>
+                  <Button onClick={createSamplePosts} className="w-full">
+                    Create Posts
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         ) : (
           <>
