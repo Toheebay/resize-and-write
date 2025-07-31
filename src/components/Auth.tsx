@@ -274,12 +274,9 @@ const Auth = () => {
           </CardContent>
         </Card>
 
-        <div className="text-center mt-6 space-y-2">
+        <div className="text-center mt-6">
           <p className="text-blue-100 text-sm">
             No email confirmation required - start using PDF tools immediately!
-          </p>
-          <p className="text-blue-200 text-xs font-medium">
-            Premium Passcode: PREMIUM2025 🔑
           </p>
         </div>
       </div>
