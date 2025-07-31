@@ -10,8 +10,9 @@ import { Navigate } from "react-router-dom";
 import { FileText, Mail, Lock, User } from "lucide-react";
 
 const Auth = () => {
-  const { signIn, signUp, user } = useAuth();
+  const { signIn, signUp, user, unlockPremium, isPremium } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [premiumPasscode, setPremiumPasscode] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -85,6 +86,16 @@ const Auth = () => {
     setLoading(false);
   };
 
+  const handlePremiumUnlock = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (unlockPremium(premiumPasscode)) {
+      toast.success("Premium features unlocked! 🎉");
+      setPremiumPasscode("");
+    } else {
+      toast.error("Invalid passcode. Try again.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -107,9 +118,10 @@ const Auth = () => {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
+              <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
                 <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                <TabsTrigger value="premium">Premium</TabsTrigger>
               </TabsList>
               
               <TabsContent value="signin" className="space-y-4 mt-6">
@@ -213,13 +225,61 @@ const Auth = () => {
                   </Button>
                 </form>
               </TabsContent>
+
+              <TabsContent value="premium" className="space-y-4 mt-6">
+                <div className="text-center mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-3 flex items-center justify-center">
+                    <User className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-lg">Premium Access</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {isPremium ? "Premium features unlocked! ✨" : "Enter passcode to unlock premium features"}
+                  </p>
+                </div>
+                
+                {!isPremium ? (
+                  <form onSubmit={handlePremiumUnlock} className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="premium-passcode">Premium Passcode</Label>
+                      <div className="relative">
+                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="premium-passcode"
+                          type="password"
+                          placeholder="Enter premium passcode"
+                          value={premiumPasscode}
+                          onChange={(e) => setPremiumPasscode(e.target.value)}
+                          className="pl-10"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <Button 
+                      type="submit" 
+                      variant="gradient" 
+                      className="w-full"
+                    >
+                      Unlock Premium
+                    </Button>
+                  </form>
+                ) : (
+                  <div className="text-center p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200">
+                    <div className="text-2xl mb-2">🎉</div>
+                    <p className="font-medium text-purple-800">Premium features are now active!</p>
+                    <p className="text-sm text-purple-600 mt-1">Enjoy unlimited access to all tools</p>
+                  </div>
+                )}
+              </TabsContent>
             </Tabs>
           </CardContent>
         </Card>
 
-        <div className="text-center mt-6">
+        <div className="text-center mt-6 space-y-2">
           <p className="text-blue-100 text-sm">
             No email confirmation required - start using PDF tools immediately!
+          </p>
+          <p className="text-blue-200 text-xs font-medium">
+            Premium Passcode: PREMIUM2025 🔑
           </p>
         </div>
       </div>

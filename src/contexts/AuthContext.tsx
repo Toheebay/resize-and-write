@@ -8,6 +8,8 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signUp: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<{ error: any }>;
+  unlockPremium: (passcode: string) => boolean;
+  isPremium: boolean;
   loading: boolean;
 }
 
@@ -25,6 +27,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isPremium, setIsPremium] = useState(false);
+
+  // Premium passcode
+  const PREMIUM_PASSCODE = "PREMIUM2025";
 
   useEffect(() => {
     // Set up auth state listener
@@ -55,13 +61,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signUp = async (email: string, password: string) => {
-    const redirectUrl = `${window.location.origin}/`;
-    
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: redirectUrl
+        emailRedirectTo: undefined // Disable email confirmation
       }
     });
     return { error };
@@ -69,8 +73,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
+    setIsPremium(false); // Reset premium status on logout
     return { error };
   };
+
+  const unlockPremium = (passcode: string) => {
+    if (passcode === PREMIUM_PASSCODE) {
+      setIsPremium(true);
+      localStorage.setItem('premiumUnlocked', 'true');
+      return true;
+    }
+    return false;
+  };
+
+  // Check for saved premium status on load
+  useEffect(() => {
+    const savedPremium = localStorage.getItem('premiumUnlocked');
+    if (savedPremium === 'true') {
+      setIsPremium(true);
+    }
+  }, []);
 
   const value = {
     user,
@@ -78,6 +100,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     signIn,
     signUp,
     signOut,
+    unlockPremium,
+    isPremium,
     loading,
   };
 
