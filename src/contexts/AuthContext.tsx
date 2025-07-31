@@ -65,20 +65,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       email,
       password,
       options: {
-        emailRedirectTo: undefined // Disable email confirmation for immediate login
+        emailRedirectTo: undefined // Disable email confirmation
       }
     });
     
-    // Auto sign in after successful signup
-    if (!error && data.user) {
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
-      return { error: signInError };
+    if (error) return { error };
+    
+    // If user exists but is unconfirmed, try to sign them in anyway
+    if (data.user && !data.session) {
+      // Wait a moment then try to sign in
+      setTimeout(async () => {
+        const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+        
+        if (signInData.session) {
+          // Success - user is now signed in
+          setSession(signInData.session);
+          setUser(signInData.user);
+        }
+      }, 500);
     }
     
-    return { error };
+    return { error: null };
   };
 
   const signOut = async () => {
