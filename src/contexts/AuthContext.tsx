@@ -61,13 +61,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signUp = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: undefined // Disable email confirmation
+        emailRedirectTo: undefined // Disable email confirmation for immediate login
       }
     });
+    
+    // Auto sign in after successful signup
+    if (!error && data.user) {
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+      return { error: signInError };
+    }
+    
     return { error };
   };
 
