@@ -9,7 +9,11 @@ import {
   Upload, 
   Download,
   Zap,
-  Shield
+  Shield,
+  Mic,
+  Merge,
+  Scissors,
+  PenTool
 } from "lucide-react";
 
 const ToolsSection = () => {
@@ -19,28 +23,56 @@ const ToolsSection = () => {
       title: "PDF to Word",
       description: "Convert PDF documents to editable Word files instantly with perfect formatting preservation.",
       features: ["Maintains original layout", "Preserves images & tables", "Batch conversion support"],
-      color: "from-blue-500 to-cyan-500"
+      color: "from-blue-500 to-cyan-500",
+      path: "/convert"
     },
     {
       icon: Minimize2,
       title: "Compress PDF",
       description: "Reduce PDF file size while maintaining quality. Choose your target size in KB.",
       features: ["Custom size selection", "Quality optimization", "Bulk compression"],
-      color: "from-green-500 to-emerald-500"
+      color: "from-green-500 to-emerald-500",
+      path: "/compress"
     },
     {
       icon: Maximize2,
       title: "Enlarge PDF",
       description: "Increase PDF file size to meet specific requirements without quality loss.",
       features: ["Size requirements met", "Quality enhancement", "Professional output"],
-      color: "from-purple-500 to-violet-500"
+      color: "from-purple-500 to-violet-500",
+      path: "/enlarge"
     },
     {
-      icon: FileEdit,
-      title: "Generate Documents",
-      description: "Create professional documents with custom information, logos, and branding.",
-      features: ["Custom logo upload", "Professional templates", "Print & download ready"],
-      color: "from-orange-500 to-red-500"
+      icon: Mic,
+      title: "Voice to PDF",
+      description: "Record voice notes and convert them to professional PDF documents instantly.",
+      features: ["Voice transcription", "Auto formatting", "Instant download"],
+      color: "from-pink-500 to-rose-500",
+      path: "/voice-notes"
+    },
+    {
+      icon: Merge,
+      title: "Merge PDFs",
+      description: "Combine multiple PDF files into a single document with custom ordering.",
+      features: ["Multiple file support", "Custom ordering", "Batch processing"],
+      color: "from-indigo-500 to-blue-500",
+      path: "/merge"
+    },
+    {
+      icon: Scissors,
+      title: "Split PDF",
+      description: "Extract specific pages from PDF documents with flexible page ranges.",
+      features: ["Page range selection", "Multiple extracts", "Fast processing"],
+      color: "from-yellow-500 to-orange-500",
+      path: "/split"
+    },
+    {
+      icon: PenTool,
+      title: "e-Signature",
+      description: "Add digital signatures to PDF documents with professional positioning.",
+      features: ["Digital signing", "Custom positioning", "Legal compliance"],
+      color: "from-teal-500 to-cyan-500",
+      path: "/sign"
     }
   ];
 
@@ -83,14 +115,7 @@ const ToolsSection = () => {
                     </li>
                   ))}
                 </ul>
-                <Link 
-                  to={
-                    tool.title === "PDF to Word" ? "/convert" :
-                    tool.title === "Compress PDF" ? "/compress" :
-                    tool.title === "Enlarge PDF" ? "/enlarge" :
-                    "/auth"
-                  }
-                >
+                <Link to={tool.path}>
                   <Button 
                     variant="gradient" 
                     className="w-full group-hover:shadow-glow"

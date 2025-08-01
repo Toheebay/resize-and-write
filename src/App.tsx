@@ -7,6 +7,10 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Auth from "./components/Auth";
 import PDFProcessor from "./components/PDFProcessor";
+import VoiceRecorder from "./components/VoiceRecorder";
+import PDFMerger from "./components/PDFMerger";
+import PDFSplitter from "./components/PDFSplitter";
+import PDFSigner from "./components/PDFSigner";
 import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
@@ -50,6 +54,10 @@ const App = () => (
               />
             } 
           />
+          <Route path="/voice-notes" element={<VoiceRecorder />} />
+          <Route path="/merge" element={<PDFMerger />} />
+          <Route path="/split" element={<PDFSplitter />} />
+          <Route path="/sign" element={<PDFSigner />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
