@@ -358,8 +358,8 @@ We believe that everyone deserves access to professional web design, regardless 
                     <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
                       {post.title}
                     </CardTitle>
-                    <CardDescription className="line-clamp-3">
-                      {post.content.substring(0, 150)}...
+                    <CardDescription className="line-clamp-4 text-base leading-relaxed">
+                      {post.content.substring(0, 200)}...
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -372,7 +372,11 @@ We believe that everyone deserves access to professional web design, regardless 
                         ))}
                       </div>
                     )}
-                    <Button variant="ghost" className="group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                    <Button 
+                      variant="ghost" 
+                      className="group-hover:bg-primary group-hover:text-primary-foreground transition-all"
+                      onClick={() => window.open("https://www.linkedin.com/posts/opportunities-for-youth-organization_africaeducatesher-fullyfundedopportunities-activity-7355477186599866368-NImo?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC-1UNkBJZ2EiMU0z8Xugh_OvJXI7XuLxAk", "_blank")}
+                    >
                       Read More
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
