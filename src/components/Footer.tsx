@@ -35,9 +35,9 @@ const Footer = () => {
   ];
 
   const contactInfo = [
-    { icon: Mail, text: "support@pdfmaster.com" },
-    { icon: Phone, text: "+1 (555) 123-4567" },
-    { icon: MapPin, text: "San Francisco, CA" }
+    { icon: Mail, text: "adebayoajani23@gmail.com" },
+    { icon: Phone, text: "+234 802 476 4090" },
+    { icon: MapPin, text: "Lagos, Nigeria" }
   ];
 
   return (
