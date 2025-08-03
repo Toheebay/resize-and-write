@@ -1,8 +1,10 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import ServicesSection from "@/components/ServicesSection";
 import ToolsSection from "@/components/ToolsSection";
 import DocumentGenerator from "@/components/DocumentGenerator";
 import BlogSection from "@/components/BlogSection";
+import ContactSection from "@/components/ContactSection";
 import PricingSection from "@/components/PricingSection";
 import Footer from "@/components/Footer";
 import AdSense from "@/components/AdSense";
@@ -22,6 +24,7 @@ const Index = () => {
         />
       </div>
       
+      <ServicesSection />
       <ToolsSection />
       <DocumentGenerator />
       <BlogSection />
@@ -35,6 +38,7 @@ const Index = () => {
         />
       </div>
       
+      <ContactSection />
       <PricingSection />
       <Footer />
     </div>

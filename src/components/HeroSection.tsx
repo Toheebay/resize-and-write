@@ -72,10 +72,10 @@ const HeroSection = () => {
               size="xl"
               className="bg-white text-primary hover:bg-white/90 shadow-glow"
               onClick={() => {
-                document.getElementById('tools')?.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              Start Processing PDFs
+              Explore Our Services
             </Button>
             <Button 
               variant="outline" 
