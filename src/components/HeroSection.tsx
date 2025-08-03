@@ -67,15 +67,16 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link to="/auth">
-              <Button 
-                variant="hero" 
-                size="xl"
-                className="bg-white text-primary hover:bg-white/90 shadow-glow"
-              >
-                Start Processing PDFs
-              </Button>
-            </Link>
+            <Button 
+              variant="hero" 
+              size="xl"
+              className="bg-white text-primary hover:bg-white/90 shadow-glow"
+              onClick={() => {
+                document.getElementById('tools')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Start Processing PDFs
+            </Button>
             <Button 
               variant="outline" 
               size="xl"
