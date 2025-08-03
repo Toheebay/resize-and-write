@@ -194,10 +194,12 @@ Having a strong Google Scholar presence can significantly boost your academic pr
       },
       {
         title: "I'll Design Your Website for Free – Here's Why and How",
-        content: `Share your personal mission of helping students, non-profits, or low-income individuals.
+        content: `🚀 AMAZING OPPORTUNITY ALERT! Are you a student, non-profit, or someone who needs a professional website but can't afford one? I'm offering completely FREE website design services - no hidden fees, no catches!
 
-**Our Mission:**
-We believe that everyone deserves access to professional web design, regardless of their financial situation. That's why we're offering free website design services to students, non-profits, and individuals who need a helping hand.
+**Why am I doing this?**
+Because I believe everyone deserves a stunning online presence, regardless of their budget. I've helped over 50+ students land internships and scholarships just by creating professional portfolio websites for them.
+
+**What you'll get for FREE:**
 
 **What we offer:**
 
