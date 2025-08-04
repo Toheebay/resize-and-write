@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import SaaSServices from "./pages/SaaSServices";
 
 import PDFProcessor from "./components/PDFProcessor";
 import VoiceRecorder from "./components/VoiceRecorder";
@@ -58,6 +59,7 @@ const App = () => (
           <Route path="/merge" element={<PDFMerger />} />
           <Route path="/split" element={<PDFSplitter />} />
           <Route path="/sign" element={<PDFSigner />} />
+          <Route path="/saas-services" element={<SaaSServices />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
