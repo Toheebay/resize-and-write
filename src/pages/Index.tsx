@@ -8,10 +8,12 @@ import ContactSection from "@/components/ContactSection";
 import PricingSection from "@/components/PricingSection";
 import Footer from "@/components/Footer";
 import AdSense from "@/components/AdSense";
+import WelcomeModal from "@/components/WelcomeModal";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <WelcomeModal />
       <Header />
       <HeroSection />
       
