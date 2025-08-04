@@ -24,12 +24,16 @@ const AdSense: React.FC<AdSenseProps> = ({
   useEffect(() => {
     try {
       if (typeof window !== 'undefined' && window.adsbygoogle) {
-        window.adsbygoogle.push({});
+        // Check if the ad has already been initialized
+        const adElement = document.querySelector(`[data-ad-slot="${adSlot}"]`);
+        if (adElement && !adElement.hasAttribute('data-adsbygoogle-status')) {
+          window.adsbygoogle.push({});
+        }
       }
     } catch (error) {
       console.error('AdSense error:', error);
     }
-  }, []);
+  }, [adSlot]);
 
   return (
     <div className={`adsense-container ${className}`}>

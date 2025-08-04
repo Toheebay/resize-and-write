@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { FileText, Menu, X } from "lucide-react";
+import { FileText, Menu, X, Download } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -12,6 +12,13 @@ const Header = () => {
     { name: "Pricing", href: "#pricing" },
     { name: "About", href: "#about" },
   ];
+
+  const handleResumeDownload = () => {
+    // Convert Google Drive share link to direct download link
+    const fileId = "1cfv3-H_iKFaOO9he2Q8yH-BWcUziJIHM";
+    const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+    window.open(downloadUrl, '_blank');
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -42,6 +49,15 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={handleResumeDownload}
+              className="flex items-center space-x-2"
+            >
+              <Download className="h-4 w-4" />
+              <span>My Resume</span>
+            </Button>
             <Button variant="gradient" size="sm">
               Start Using Tools
             </Button>
@@ -75,6 +91,14 @@ const Header = () => {
                 </a>
               ))}
               <div className="pt-4 space-y-2">
+                <Button 
+                  variant="outline" 
+                  className="w-full flex items-center justify-center space-x-2"
+                  onClick={handleResumeDownload}
+                >
+                  <Download className="h-4 w-4" />
+                  <span>My Resume</span>
+                </Button>
                 <Button variant="gradient" className="w-full">
                   Start Using Tools
                 </Button>
