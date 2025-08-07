@@ -51,12 +51,12 @@ const Footer = () => {
                 <FileText className="h-6 w-6 text-white" />
               </div>
               <span className="text-xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-                PDFMaster
+                Toheebay Web Services
               </span>
             </div>
             <p className="text-muted-foreground mb-6 max-w-md">
-              The most powerful and user-friendly PDF processing platform. 
-              Convert, compress, enlarge, and generate professional documents with ease.
+              Smart, affordable, and results-driven digital solutions for individuals, startups, and businesses. 
+              Website design, mobile apps, social media management, and branding services.
             </p>
             
             {/* Contact Info */}
@@ -94,7 +94,7 @@ const Footer = () => {
         <div className="border-t border-border mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex flex-wrap items-center space-x-6 text-sm text-muted-foreground">
-              <span>© 2024 PDFMaster. All rights reserved.</span>
+              <span>© 2024 Toheebay Web Services. All rights reserved.</span>
               <a href="#" className="hover:text-primary transition-colors">
                 Terms of Service
               </a>

@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { FileText, Menu, X, Download } from "lucide-react";
+import { Globe, Menu, X, Download } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,10 +29,10 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="p-2 bg-gradient-hero rounded-lg shadow-glow">
-              <FileText className="h-6 w-6 text-white" />
+              <Globe className="h-6 w-6 text-white" />
             </div>
             <span className="text-xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-              PDFMaster
+              Toheebay Web Services
             </span>
           </Link>
 
@@ -60,6 +61,7 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
+            <ThemeToggle />
             <Button 
               variant="outline" 
               size="sm"
@@ -70,7 +72,7 @@ const Header = () => {
               <span>My Resume</span>
             </Button>
             <Button variant="gradient" size="sm">
-              Start Using Tools
+              Get Started
             </Button>
           </div>
 
@@ -113,6 +115,9 @@ const Header = () => {
                 )
               ))}
               <div className="pt-4 space-y-2">
+                <div className="flex justify-center pb-4">
+                  <ThemeToggle />
+                </div>
                 <Button 
                   variant="outline" 
                   className="w-full flex items-center justify-center space-x-2"
@@ -122,7 +127,7 @@ const Header = () => {
                   <span>My Resume</span>
                 </Button>
                 <Button variant="gradient" className="w-full">
-                  Start Using Tools
+                  Get Started
                 </Button>
               </div>
             </div>

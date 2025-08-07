@@ -7,19 +7,19 @@ const HeroSection = () => {
   const features = [
     {
       icon: FileText,
-      text: "Convert PDF to Word"
+      text: "Website Development"
     },
     {
       icon: Zap,
-      text: "Lightning Fast"
+      text: "Mobile Apps"
     },
     {
       icon: Shield,
-      text: "100% Secure"
+      text: "Social Media"
     },
     {
       icon: Download,
-      text: "Free Downloads"
+      text: "Graphics & Branding"
     }
   ];
 
@@ -40,16 +40,16 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto">
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            Transform Your
+            Smart Digital Solutions
             <span className="block bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
-              PDF Documents
+              For Your Business
             </span>
-            in Seconds
+            Growth & Success
           </h1>
 
           {/* Subheading */}
           <p className="text-xl sm:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Convert, compress, enlarge, and generate professional documents with our advanced PDF processing tools. No registration required.
+            Website Design, Mobile Apps, Social Media Management & Branding Services. Let's bring your vision to reality with innovative digital solutions.
           </p>
 
           {/* Feature Pills */}
@@ -75,7 +75,7 @@ const HeroSection = () => {
                 document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              Explore Our Services
+              View Our Services
             </Button>
             <Button 
               variant="outline" 
@@ -88,13 +88,13 @@ const HeroSection = () => {
 
           {/* Trust Indicators */}
           <div className="mt-12 text-center">
-            <p className="text-blue-200 text-sm mb-4">Trusted by 50,000+ users worldwide</p>
+            <p className="text-blue-200 text-sm mb-4">Trusted by 200+ businesses worldwide</p>
             <div className="flex justify-center items-center space-x-8 opacity-60">
-              <div className="text-white font-semibold">4.9/5 ★★★★★</div>
+              <div className="text-white font-semibold">5.0/5 ★★★★★</div>
               <div className="text-white">•</div>
-              <div className="text-white font-semibold">1M+ Documents Processed</div>
+              <div className="text-white font-semibold">100+ Projects Delivered</div>
               <div className="text-white">•</div>
-              <div className="text-white font-semibold">100% Secure</div>
+              <div className="text-white font-semibold">100% Client Satisfaction</div>
             </div>
           </div>
         </div>
