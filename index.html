@@ -3,6 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/lovable-uploads/c30f4f1b-9cdf-4be7-b7fb-a740b1c9338e.png" type="image/png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="PDF Tools">
+    <link rel="apple-touch-icon" href="/lovable-uploads/c30f4f1b-9cdf-4be7-b7fb-a740b1c9338e.png">
     <meta name="google-adsense-account" content="ca-pub-5307036868654120">
     <title>PDF Tools - Free Online PDF Solutions</title>
     <meta name="description" content="Free online PDF tools for compression, conversion, and document generation" />
@@ -23,5 +30,18 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,26 @@
+{
+  "name": "PDF Tools - Free Online PDF Solutions",
+  "short_name": "PDF Tools",
+  "description": "Free online PDF tools for compression, conversion, and document generation",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/lovable-uploads/c30f4f1b-9cdf-4be7-b7fb-a740b1c9338e.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/c30f4f1b-9cdf-4be7-b7fb-a740b1c9338e.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "lang": "en"
+}
