@@ -1,6 +1,7 @@
 
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { saveAs } from 'file-saver';
+import { supabase } from "@/integrations/supabase/client";
 
 export const convertWordToPDF = async (file: File): Promise<void> => {
   try {
@@ -110,20 +111,15 @@ please use our premium conversion service.`;
 
 export const paraphraseText = async (text: string, tone: string = 'neutral'): Promise<string> => {
   try {
-    const response = await fetch('/functions/v1/paraphrase', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ text, tone }),
+    const { data, error } = await supabase.functions.invoke('paraphrase', {
+      body: { text, tone },
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    if (error) {
+      throw error;
     }
 
-    const data = await response.json();
-    return data.paraphrasedText;
+    return (data as { paraphrasedText: string }).paraphrasedText;
   } catch (error) {
     console.error('Error paraphrasing text:', error);
     throw new Error('Failed to paraphrase text. Please try again.');
