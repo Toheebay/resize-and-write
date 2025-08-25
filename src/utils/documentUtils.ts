@@ -116,10 +116,15 @@ export const paraphraseText = async (text: string, tone: string = 'neutral'): Pr
     });
 
     if (error) {
-      throw error;
+      throw new Error((error as any)?.message || 'Failed to paraphrase text.');
     }
 
-    return (data as { paraphrasedText: string }).paraphrasedText;
+    const result = (data as { paraphrasedText?: string })?.paraphrasedText;
+    if (!result) {
+      throw new Error('No paraphrased text returned from server.');
+    }
+
+    return result;
   } catch (error) {
     console.error('Error paraphrasing text:', error);
     throw new Error('Failed to paraphrase text. Please try again.');

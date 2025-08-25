@@ -35,9 +35,10 @@ const Paraphraser = () => {
         description: "Text paraphrased successfully!",
       });
     } catch (error) {
+      const message = error instanceof Error ? error.message : 'Failed to paraphrase text. Please try again.';
       toast({
         title: "Error",
-        description: "Failed to paraphrase text. Please try again.",
+        description: message,
         variant: "destructive",
       });
     } finally {

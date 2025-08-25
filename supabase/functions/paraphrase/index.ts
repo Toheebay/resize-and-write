@@ -16,6 +16,13 @@ serve(async (req) => {
   try {
     const { text, tone } = await req.json();
 
+    if (!openAIApiKey) {
+      return new Response(
+        JSON.stringify({ error: 'Missing OpenAI API key. Please set OPENAI_API_KEY in Supabase secrets.' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     if (!text?.trim()) {
       return new Response(
         JSON.stringify({ error: 'Text is required' }),
@@ -57,9 +64,10 @@ serve(async (req) => {
     });
 
     if (!response.ok) {
-      console.error('OpenAI API error:', response.status, response.statusText);
+      const errText = await response.text();
+      console.error('OpenAI API error:', response.status, response.statusText, errText);
       return new Response(
-        JSON.stringify({ error: 'Failed to paraphrase text' }),
+        JSON.stringify({ error: `OpenAI error ${response.status}: ${response.statusText}` }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
