@@ -109,23 +109,25 @@ please use our premium conversion service.`;
 };
 
 export const paraphraseText = async (text: string, tone: string = 'neutral'): Promise<string> => {
-  // Simulate AI paraphrasing
-  await new Promise(resolve => setTimeout(resolve, 1500));
-  
-  const paraphrasedText = `[Paraphrased with ${tone} tone]\n\n${text.split(' ').map(word => {
-    // Simple word replacement simulation
-    const synonyms: { [key: string]: string } = {
-      'good': 'excellent',
-      'bad': 'poor',
-      'big': 'large',
-      'small': 'tiny',
-      'fast': 'quick',
-      'slow': 'gradual'
-    };
-    return synonyms[word.toLowerCase()] || word;
-  }).join(' ')}`;
-  
-  return paraphrasedText;
+  try {
+    const response = await fetch('/functions/v1/paraphrase', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text, tone }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.paraphrasedText;
+  } catch (error) {
+    console.error('Error paraphrasing text:', error);
+    throw new Error('Failed to paraphrase text. Please try again.');
+  }
 };
 
 export const checkGrammar = async (text: string): Promise<{ correctedText: string; suggestions: any[] }> => {
