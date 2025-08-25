@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -13,7 +14,15 @@ import {
   Mic,
   Merge,
   Scissors,
-  PenTool
+  PenTool,
+  RefreshCw,
+  CheckCircle,
+  Search,
+  Copy,
+  Bot,
+  Quote,
+  BookOpen,
+  Languages
 } from "lucide-react";
 
 const ToolsSection = () => {
@@ -25,6 +34,14 @@ const ToolsSection = () => {
       features: ["Maintains original layout", "Preserves images & tables", "Batch conversion support"],
       color: "from-blue-500 to-cyan-500",
       path: "/convert"
+    },
+    {
+      icon: FileEdit,
+      title: "Word to PDF",
+      description: "Convert Word documents to professional PDF files with optimal compression and quality.",
+      features: ["Perfect formatting", "High-quality output", "Instant conversion"],
+      color: "from-indigo-500 to-purple-500",
+      path: "/word-to-pdf"
     },
     {
       icon: Minimize2,
@@ -41,6 +58,70 @@ const ToolsSection = () => {
       features: ["Size requirements met", "Quality enhancement", "Professional output"],
       color: "from-purple-500 to-violet-500",
       path: "/enlarge"
+    },
+    {
+      icon: RefreshCw,
+      title: "Paraphraser",
+      description: "Rewrite and rephrase text while maintaining original meaning with AI-powered paraphrasing.",
+      features: ["Multiple tone options", "Plagiarism-free output", "Context preservation"],
+      color: "from-orange-500 to-red-500",
+      path: "/paraphraser"
+    },
+    {
+      icon: CheckCircle,
+      title: "Grammar Check",
+      description: "Advanced grammar and spell checking with contextual suggestions and style improvements.",
+      features: ["Real-time checking", "Style suggestions", "Contextual corrections"],
+      color: "from-green-600 to-teal-500",
+      path: "/grammar-check"
+    },
+    {
+      icon: Search,
+      title: "AI Detector",
+      description: "Detect AI-generated content with advanced machine learning algorithms and confidence scores.",
+      features: ["High accuracy detection", "Confidence scoring", "Detailed analysis"],
+      color: "from-red-500 to-pink-500",
+      path: "/ai-detector"
+    },
+    {
+      icon: Copy,
+      title: "Plagiarism Check",
+      description: "Comprehensive plagiarism detection across billions of sources with detailed similarity reports.",
+      features: ["Extensive database", "Source identification", "Similarity percentage"],
+      color: "from-yellow-500 to-orange-600",
+      path: "/plagiarism-check"
+    },
+    {
+      icon: Bot,
+      title: "AI Humanizer",
+      description: "Transform AI-generated content into natural, human-like text that bypasses AI detection.",
+      features: ["Natural language output", "Bypass AI detection", "Maintain meaning"],
+      color: "from-cyan-500 to-blue-600",
+      path: "/ai-humanizer"
+    },
+    {
+      icon: Quote,
+      title: "Citation Generator",
+      description: "Generate accurate citations in APA, MLA, Chicago, and other academic formats automatically.",
+      features: ["Multiple formats", "Auto-formatting", "Bibliography creation"],
+      color: "from-violet-500 to-purple-600",
+      path: "/citation-generator"
+    },
+    {
+      icon: BookOpen,
+      title: "Summarizer",
+      description: "Create concise summaries of long documents, articles, and texts with key point extraction.",
+      features: ["Key point extraction", "Adjustable length", "Multiple formats"],
+      color: "from-emerald-500 to-green-600",
+      path: "/summarizer"
+    },
+    {
+      icon: Languages,
+      title: "Translator",
+      description: "Professional translation service supporting 100+ languages with context-aware accuracy.",
+      features: ["100+ languages", "Context-aware", "Professional quality"],
+      color: "from-pink-500 to-rose-600",
+      path: "/translator"
     },
     {
       icon: Mic,
@@ -82,11 +163,11 @@ const ToolsSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Powerful PDF Tools at Your
+            Powerful Document & AI Tools at Your
             <span className="bg-gradient-hero bg-clip-text text-transparent"> Fingertips</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Everything you need to work with PDF documents. Fast, secure, and professional results every time.
+            Everything you need to work with documents, content creation, and AI-powered text processing. Fast, secure, and professional results every time.
           </p>
         </div>
 
@@ -138,17 +219,17 @@ const ToolsSection = () => {
               {
                 icon: Upload,
                 title: "Upload",
-                description: "Drag & drop or select your PDF files"
+                description: "Upload your documents or enter your text"
               },
               {
                 icon: Zap,
                 title: "Process",
-                description: "Choose your tool and configure settings"
+                description: "Choose your tool and configure AI settings"
               },
               {
                 icon: Download,
                 title: "Download",
-                description: "Get your processed files instantly"
+                description: "Get your processed files or results instantly"
               }
             ].map((step, index) => (
               <div key={index} className="text-center">
@@ -166,7 +247,7 @@ const ToolsSection = () => {
         <div className="text-center mt-12">
           <div className="inline-flex items-center space-x-2 bg-green-50 text-green-700 px-4 py-2 rounded-full border border-green-200">
             <Shield className="h-4 w-4" />
-            <span className="text-sm font-medium">Your files are automatically deleted after 1 hour</span>
+            <span className="text-sm font-medium">Your files and data are automatically deleted after processing</span>
           </div>
         </div>
       </div>
